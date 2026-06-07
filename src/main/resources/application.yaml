@@ -13,5 +13,5 @@ management:
 
 kenect:
   labs:
-    base-url: "https://candidate-challenge-api-489237493095.us-central1.run.app"
-    auth-token: ${KENECT_AUTH_TOKEN:J7ybt6jv6pdJ4gyQP9gNonsY}
+    baseUrl: "https://candidate-challenge-api-489237493095.us-central1.run.app"
+    authToken: ${KENECT_AUTH_TOKEN:J7ybt6jv6pdJ4gyQP9gNonsY}
