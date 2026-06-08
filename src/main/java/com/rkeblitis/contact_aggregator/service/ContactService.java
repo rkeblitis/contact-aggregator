@@ -3,9 +3,11 @@ package com.rkeblitis.contact_aggregator.service;
 import com.rkeblitis.contact_aggregator.client.KenectLabsClient;
 import com.rkeblitis.contact_aggregator.model.Contact;
 import com.rkeblitis.contact_aggregator.model.KenectLabsContact;
+import com.rkeblitis.contact_aggregator.client.PageResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class ContactService {
@@ -19,7 +21,14 @@ public class ContactService {
     }
 
     public List<Contact> getAllContacts() {
-        List<KenectLabsContact> externalContacts = kenectLabsClient.fetchPage(1);
+        PageResult firstPage = kenectLabsClient.fetchPage(1);
+        int totalPages = firstPage.totalPages();
+
+        List<KenectLabsContact> externalContacts = new ArrayList<>(firstPage.contacts());
+
+        for (int page = 2; page <= totalPages; page ++) {
+            externalContacts.addAll(kenectLabsClient.fetchPage(page).contacts());
+        }
 
         return externalContacts.stream()
             .map(this::toContact)
