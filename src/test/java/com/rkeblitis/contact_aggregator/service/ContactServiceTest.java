@@ -57,9 +57,11 @@ class ContactServiceTest {
             Instant.parse("2021-01-01T00:00:00.000Z"));
 
         KenectLabsContact two = new KenectLabsContact(
-                2L, "Page Two Person", "two@example.com",
-                Instant.parse("2021-02-02T00:00:00.000Z"),
-                Instant.parse("2021-02-02T00:00:00.000Z"));
+            2L, 
+            "Page Two Person", 
+            "two@example.com",
+            Instant.parse("2021-02-02T00:00:00.000Z"),
+            Instant.parse("2021-02-02T00:00:00.000Z"));
 
         when(client.fetchPage(1)).thenReturn(new PageResult(List.of(one), 2));
         when(client.fetchPage(2)).thenReturn(new PageResult(List.of(two), 2));
@@ -80,9 +82,11 @@ class ContactServiceTest {
         KenectLabsClient client = mock(KenectLabsClient.class);
 
         KenectLabsContact only = new KenectLabsContact(
-                1L, "Only Person", "only@example.com",
-                Instant.parse("2021-01-01T00:00:00.000Z"),
-                Instant.parse("2021-01-01T00:00:00.000Z"));
+            1L, 
+            "Only Person", 
+            "only@example.com",
+            Instant.parse("2021-01-01T00:00:00.000Z"),
+            Instant.parse("2021-01-01T00:00:00.000Z"));
 
         when(client.fetchPage(1)).thenReturn(new PageResult(List.of(only), 1));
 
