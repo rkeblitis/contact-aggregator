@@ -46,7 +46,7 @@ class ContactServiceTest {
     }
 
     @Test
-    void fetchesAllPagesandCombinesThem() {
+    void fetchesAllPagesAndCombinesThem() {
         KenectLabsClient client = mock(KenectLabsClient.class);
 
         KenectLabsContact one = new KenectLabsContact(
@@ -109,5 +109,18 @@ class ContactServiceTest {
 
         assertThatThrownBy(() -> service.getAllContacts())
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void returnsEmptyListWhenNoContacts() {
+        KenectLabsClient client = mock(KenectLabsClient.class);
+
+        when(client.fetchPage(1)).thenReturn(new PageResult(List.of(), 1));
+
+        ContactService service = new ContactService(client);
+
+        List<Contact> result = service.getAllContacts();
+
+        assertThat(result).isEmpty();
     }
 }
