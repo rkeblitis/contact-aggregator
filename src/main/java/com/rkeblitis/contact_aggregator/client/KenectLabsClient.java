@@ -18,7 +18,7 @@ public class KenectLabsClient {
 
     public List<KenectLabsContact> fetchPage(int page) {
         return restClient.get()
-            .uri("/api/vi/contacts?page={page}", page)
+            .uri("/api/v1/contacts?page={page}", page)
             .retrieve()
             .body(new ParameterizedTypeReference<List<KenectLabsContact>>() {});
     }
