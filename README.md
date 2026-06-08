@@ -5,6 +5,7 @@ A read-only service that collects all contacts from the Kenect Labs API, normali
 ## Running it
 
 Run: `./mvnw spring-boot:run`
+
 Call it: `curl http://localhost:8080/contacts`
 
 - Requires JDK 21.
@@ -20,7 +21,7 @@ Pagination: the service pages through all results and combines them into one lis
 
 ## Testing
 
-Run tests with `./mvnw test`. The service logic is unit-tested, the client is tested against a mock HTTP server, and a controller covers the JSON contract.
+Run tests with `./mvnw test`. Service logic is unit-tested, the client is tested against a mock HTTP server, and a controller test covers the JSON contract.
 
 ## A note on pagination
 
