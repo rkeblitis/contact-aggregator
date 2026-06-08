@@ -10,9 +10,11 @@ import java.time.Instant;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.never;
 
 class ContactServiceTest {
     @Test
@@ -71,5 +73,37 @@ class ContactServiceTest {
 
         verify(client).fetchPage(1);
         verify(client).fetchPage(2);
+    }
+
+    @Test
+    void doesNotFetchBeyondTheLastPage() {
+        KenectLabsClient client = mock(KenectLabsClient.class);
+
+        KenectLabsContact only = new KenectLabsContact(
+                1L, "Only Person", "only@example.com",
+                Instant.parse("2021-01-01T00:00:00.000Z"),
+                Instant.parse("2021-01-01T00:00:00.000Z"));
+
+        when(client.fetchPage(1)).thenReturn(new PageResult(List.of(only), 1));
+
+        ContactService service = new ContactService(client);
+
+        List<Contact> result = service.getAllContacts();
+
+        assertThat(result).hasSize(1);
+        verify(client).fetchPage(1);
+        verify(client, never()).fetchPage(2);
+    }
+
+    @Test
+    void throwsErrorWhenClientFails() {
+        KenectLabsClient client = mock(KenectLabsClient.class);
+
+        when(client.fetchPage(1)).thenThrow(new RuntimeException("downstream unavailable"));
+
+        ContactService service = new ContactService(client);
+
+        assertThatThrownBy(() -> service.getAllContacts())
+                .isInstanceOf(RuntimeException.class);
     }
 }
