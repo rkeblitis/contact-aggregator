@@ -8,8 +8,8 @@ Run: `./mvnw spring-boot:run`
 
 Call it: `curl http://localhost:8080/contacts`
 
-- Requires JDK 21.
-- The auth token reads from the `KENECT_AUTH_TOKEN` env var, with a default so it runs with no setup.
+- Requires JDK 21
+- The auth token reads from the `KENECT_AUTH_TOKEN` env var, with a default so it runs with no setup
 
 ## Design
 
