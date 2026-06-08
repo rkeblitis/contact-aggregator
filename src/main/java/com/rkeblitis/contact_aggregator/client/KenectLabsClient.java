@@ -16,7 +16,7 @@ public class KenectLabsClient {
         this.restClient = restClient;
     }
 
-    public <List>KenectLabsContact> fetchPage(int page) {
+    public List<KenectLabsContact> fetchPage(int page) {
         return restClient.get()
             .uri("/api/vi/contacts?page={page}", page)
             .retrieve()
