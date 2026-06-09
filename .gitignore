@@ -1,17 +1,10 @@
-# Personal / local only
-docs/DECISIONS.md
-docs/PATTERNS.md
-docs/PRODUCTION.md
-.cursor/
-.cursor/rules/coach.mdc
-.env
-
 # Spring Boot / Maven
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.env
 
 ### STS ###
 .apt_generated
